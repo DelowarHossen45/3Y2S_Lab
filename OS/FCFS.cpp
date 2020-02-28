@@ -1,42 +1,44 @@
-#include<iostream>
 
+#include<bits/stdc++.h>
 using namespace std;
-
-int main()
-{
-    int n,bt[20],wt[20],tat[20],avwt=0,avtat=0,i,j;
-    cout<<"Enter total number of processes(maximum 20):";
-    cin>>n;
-
-    cout<<"\nEnter Process Burst Time\n";
-    for(i=0;i<n;i++)
-    {
-        cout<<"P["<<i+1<<"]:";
-        cin>>bt[i];
-    }
-
+void findWaitingTime(int pro[],int n,int B[]){
+    int tn[n],wt[n],i,totalTn=0,totalWt=0;
+    tn[0]=0;
     wt[0]=0;
 
-    for(i=1;i<n;i++)
-    {
-        wt[i]=0;
-        for(j=0;j<i;j++)
-            wt[i]+=bt[j];
+    for(i=1;i<=n;i++){
+        tn[i] = tn[i-1]+B[i];
+        totalTn = totalTn + tn[i];
     }
 
-    cout<<"\nProcess\t\tBurst Time\tWaiting Time\tTurnaround Time";
-     for(i=0;i<n;i++)
-    {
-        tat[i]=bt[i]+wt[i];
-        avwt+=wt[i];
-        avtat+=tat[i];
-        cout<<"\nP["<<i+1<<"]"<<"\t\t"<<bt[i]<<"\t\t"<<wt[i]<<"\t\t"<<tat[i];
+    for(i=1;i<=n;i++){
+        wt[i] = (tn[i]-B[i]);
+        totalWt = totalWt + wt[i];
     }
 
-    avwt/=i;
-    avtat/=i;
-    cout<<"\n\nAverage Waiting Time:"<<avwt;
-    cout<<"\nAverage Turnaround Time:"<<avtat;
+    cout << "Processes  "<< " Burst time  "
+         << " Waiting time  " << " Turn around time\n";
+    for(i=1;i<=n;i++){
+        cout<<" "<<pro[i]<<"\t\t"<<B[i]<<"\t\t"
+            <<wt[i]<<"\t\t"<<tn[i]<<endl;
+         }
+    cout<<endl;
+    cout << "Average waiting time = "
+         << (float)totalWt / (float)n;
 
-    return 0;
+    cout << "\nAverage turn around time = "
+         << (float)totalTn / (float)n;
+}
+int main()
+{
+    int n,i;
+    cout<<"Total number of process\n";
+    cin>>n;
+    int p[n],b[n];
+    cout<<"processes "<<"burst time\n";
+     for(i=1;i<=n;i++){
+        cin>>p[i];
+        cin>>b[i];
+     }
+     findWaitingTime(p,n,b);
 }

@@ -4,45 +4,46 @@
 
 int main()
 {
-int dx,dy,x,y,p,x1,y1,x2,y2;
-int gd,gm;
+    int dx,dy,x,y,p,x1,y1,x2,y2;
+    int gd,gm;
 
 
-printf("Enter the co-ordinates of first point : ");
-scanf("%d %d",&x1,&y1);
-printf("Enter the co-ordinates of second point : ");
-scanf("%d %d",&x2,&y2);
+    printf("Enter the co-ordinates of first point : ");
+    scanf("%d %d",&x1,&y1);
+    printf("Enter the co-ordinates of second point : ");
+    scanf("%d %d",&x2,&y2);
 
-dx = (x2 - x1);
-dy = (y2 - y1);
+    dx = (x2 - x1);
+    dy = (y2 - y1);
 
-p = 2 * (dy) - (dx);
+    p = 2 * (dy) - (dx);
 
-x = x1;
-y = y1;
+    x = x1;
+    y = y1;
 
-//detectgraph(&gd,&gm);
-initgraph(&gd,&gm,"");
-putpixel(x,y,YELLOW);
+    initgraph(&gd,&gm,"");
+    putpixel(x,y,YELLOW);
 
-while(x <= x2)
-{
-if(p < 0)
-{
-x=x+1;
-y=y;
-p = p + 2 * (dy);
-}
-else
-{
-x=x+1;
-y=y+1;
-p = p + 2 * (dy - dx);
-}
-putpixel(x,y,YELLOW);
-}
-getch();
-closegraph();
+    while(x <= x2)
+    {
+        if(p < 0)
+        {
+            x=x+1;
+            y=y;
+            p = p + 2 * (dy);
+        }
+        else
+        {
+            x=x+1;
+            y=y+1;
+            p = p + 2 * (dy - dx);
+        }
+
+
+        putpixel(x,y,YELLOW);
+        }
+    getch();
+    closegraph();
 
 }
 
